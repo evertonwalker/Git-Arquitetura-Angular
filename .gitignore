@@ -13,4 +13,3 @@ client/app/**/*.map
 client/npm-debug.log
 server/npm-debug.log
 node_modules
-client/
