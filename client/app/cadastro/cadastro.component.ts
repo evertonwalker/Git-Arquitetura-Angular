@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FotoComponent } from '../foto/foto.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FotoService } from '../foto/foto.service';
@@ -17,6 +17,7 @@ export class CadastroComponent {
     route : ActivatedRoute;
     router: Router;
     mensagem: string = '';
+    @Output() alterar = new EventEmitter();
 
 
     constructor(service: FotoService, fb: FormBuilder, route: ActivatedRoute, router: Router) {
@@ -56,10 +57,17 @@ export class CadastroComponent {
                 this.meuForm.reset();
                 this.mensagem = resultado.mensagem;
                 if(!resultado.inclusao){
-                    this.router.navigate(['']);
+                    this.mensagem = resultado.mensagem;
+                    console.log('não chega aq');
+                    //this.router.navigate(['']);
                 }
             }, erro => {
                 console.log(erro);
             });
     }
+
+    teste(){
+        console.log('eae');
+    }
+
 }

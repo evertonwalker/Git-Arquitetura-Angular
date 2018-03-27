@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FotoComponent } from '../foto/foto.component';
 import { FotoService } from '../foto/foto.service';
 import { timeout } from 'rxjs/operator/timeout';
 import { PainelComponent } from '../painel/painel.component';
-
+import * as $ from 'jquery';
 @Component({
     moduleId: module.id,
     selector: 'listagem',
@@ -16,11 +16,9 @@ export class ListagemComponent {
     fotos: FotoComponent[] = [];
     service: FotoService;
     mensagem: String = '';
+    jersonEbonito = 'Jersinho é do caramba';
 
     constructor(service: FotoService, painel: PainelComponent) {
-
-        this.service = service;
-
         service.lista()
             .subscribe(
                 fotos => this.fotos = fotos,
@@ -39,8 +37,7 @@ export class ListagemComponent {
                     let indiceFotoApagada = this.fotos.indexOf(foto);
                     novaFotos.splice(indiceFotoApagada, 1);
                     this.fotos = novaFotos;
-                    this.mensagem = "Foto apagada com Sucesso";
-                    
+                    this.mensagem = "Foto apagada com Sucesso";                 
                     setTimeout(() => {
                         this.mensagem = "";
                     }, 2000);
@@ -52,6 +49,15 @@ export class ListagemComponent {
             }
     
             )
+
+    }
+
+    mensagemAlterar():void  {
+        this.mensagem = "Foto Atualizada com Sucesso";
+                    
+        setTimeout(() => {
+            this.mensagem = "";
+        }, 2000);
 
     }
 

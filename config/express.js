@@ -1,17 +1,18 @@
 //importando o modulo express mapeamento de requisições
 var express = require('express');
-//estanciando o express na variável app.
-var app = express();
-//importando modulo que lhe da com o tratamento de importação de rotas, de forma que a cada rota criada não precisaremos
-//importar dentro do express.js
-//require('../app/routes/grupo')(app);
-//require('../app/routes/foto')(app); se não tudo iria ficar dessa maneira
-
-
+//fica responsável por carregar todos componentes que iramos precisar.
 var consign = require('consign');
 
+//utilzado para converter os dados para JSON 
+var bodyParser = require('body-parser'); 
+
+//estanciando o express na variável app.
+var app = express();
+
+app.use(bodyParser.json());
 // configurações para deixar a pasta do nosso projeto pública e assim o express conseguir abrir ela
 app.use(express.static('./client/'));
+
 
 //cwd: pergunta qual primeiro diretório será o padrão, artifício usado mais para importação
 
@@ -31,3 +32,8 @@ Middlewares são funções que lidam com requisições. Uma pilha de middlewares
  finalidades (segurança, logging, auditoria etc.). Cada middleware passará o controle para o próximo até que todos sejam aplicados.
 
  */
+
+ //importando modulo que lhe da com o tratamento de importação de rotas, de forma que a cada rota criada não precisaremos
+//importar dentro do express.js
+//require('../app/routes/grupo')(app);
+//require('../app/routes/foto')(app); se não tudo iria ficar dessa maneira
